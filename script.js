@@ -20,6 +20,9 @@ const CORS_PROXY = 'https://api.allorigins.win/get?url=';
  */
 async function fetchWithCORS(url) {
     try {
+        if (!navigator.onLine) {
+            throw new Error('Sin conexión a internet. Intenta de nuevo cuando tengas conexión.');
+        }
         // Intentar primero sin proxy
         const response = await fetch(url);
         if (response.ok) {
@@ -61,6 +64,7 @@ const booksContainer = document.getElementById('booksContainer');
 const bookDetails = document.getElementById('bookDetails');
 const errorMessage = document.getElementById('errorMessage');
 const loadingMessage = document.getElementById('loadingMessage');
+const offlineMessage = document.getElementById('offlineMessage');
 
 // Elementos de formularios
 const searchForm = document.getElementById('searchForm');
@@ -700,6 +704,24 @@ function escapeHTML(text) {
 }
 
 /**
+ * Muestra el aviso de modo offline
+ */
+function showOffline() {
+    if (offlineMessage) {
+        offlineMessage.style.display = 'block';
+    }
+}
+
+/**
+ * Oculta el aviso de modo offline
+ */
+function hideOffline() {
+    if (offlineMessage) {
+        offlineMessage.style.display = 'none';
+    }
+}
+
+/**
  * Registra el Service Worker para habilitar PWA
  */
 function registerServiceWorker() {
@@ -756,6 +778,10 @@ function initApp() {
     reviewISBN.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleReviews();
     });
+
+    if (!navigator.onLine) showOffline();
+    window.addEventListener('offline', showOffline);
+    window.addEventListener('online', hideOffline);
 
     registerServiceWorker();
 }
