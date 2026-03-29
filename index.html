@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYT Books API - Lisandro Rodriguez</title>
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>📚 Books - Consumpo de Api</h1>
+        <p>Pagina web para consumir la NYT Books API Lisandro Rodriguez</p>
+    </header>
+
+    <main>
+        <!-- SECCIÓN DE CARGA -->
+        <section id="loadingMessage" class="loading-container" style="display: none;">
+            <div class="spinner"></div>
+            <p id="loadingText">Cargando...</p>
+        </section>
+
+        <!-- SECCIÓN DE ERROR -->
+        <section id="errorMessage" class="error-container" style="display: none;">
+            <h3>Oops, algo salio mal</h3>
+            <p id="errorText"></p>
+            <button onclick="backToMenu()" class="back-btn" style="margin-top: 1rem;">Volver al menu</button>
+        </section>
+
+        <!-- CONTENEDOR DE LIBROS/RESULTADOS -->
+        <section id="booksContainer" class="books-container" style="display: none;"></section>
+
+        <!-- MENÚ PRINCIPAL -->
+        <section id="mainMenu" class="menu-container">
+            <h2> Endpoints Disponibles</h2>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="handleBestsellers1()">
+                    1. Best Sellers <br><small>Young Adult Hardcover</small>
+                </button>
+                <button class="menu-btn" onclick="handleBestsellers2()">
+                    2. Best Sellers Ficcion<br><small>Hardcover Fiction</small>
+                </button>
+                <button class="menu-btn" onclick="handleBestsellers3()">
+                    3. Best Sellers NoFiccion<br><small>Hardcover Nonfiction</small>
+                </button>
+                <button class="menu-btn" onclick="showMenu('search')">
+                    4. Buscar Libro<br><small>Por titulo</small>
+                </button>
+                <button class="menu-btn" onclick="showMenu('searchAuthor')">
+                    5. Buscar Autor<br><small>Por nombre del autor</small>
+                </button>
+                <button class="menu-btn" onclick="showMenu('categories')">
+                    6. Ver Categorias<br><small>Todas las listas</small>
+                </button>
+            </div>
+        </section>
+
+        <!-- FORMULARIO: BUSCAR POR TITULO -->
+        <section id="searchForm" class="form-container" style="display: none;">
+            <h2>Buscar Libro por Titulo</h2>
+            <p style="color: #6b7280; margin-bottom: 1.5rem;">Ingresa el titulo para buscar (ej: Harry Potter)</p>
+            <div class="form-group">
+                <label for="titleInput">Titulo:</label>
+                <input type="text" id="titleInput" placeholder="Ej: Harry Potter">
+            </div>
+            <div class="form-buttons">
+                <button onclick="handleSearchBook()" class="search-btn">Buscar</button>
+                <button onclick="backToMenu()" class="back-btn">Atras</button>
+            </div>
+        </section>
+
+        <!-- FORMULARIO: BUSCAR POR AUTOR -->
+        <section id="searchAuthorForm" class="form-container" style="display: none;">
+            <h2>Buscar por Autor</h2>
+            <p style="color: #6b7280; margin-bottom: 1.5rem;">Ingresa el nombre del autor</p>
+            <div class="form-group">
+                <label for="authorInput">Autor:</label>
+                <input type="text" id="authorInput" placeholder="Ej: J.K. Rowling">
+            </div>
+            <div class="form-buttons">
+                <button onclick="handleSearchAuthor()" class="search-btn">Buscar</button>
+                <button onclick="backToMenu()" class="back-btn">Atras</button>
+            </div>
+        </section>
+
+        <!-- FORMULARIO: CATEGORIAS -->
+        <section id="categoriesForm" class="form-container" style="display: none;">
+            <h2>Ver Categorias</h2>
+            <p style="color: #6b7280; margin-bottom: 1.5rem;">Haz clic para cargar todas las categorias disponibles</p>
+            <div class="form-buttons">
+                <button onclick="handleCategories()" class="search-btn">Cargar Categorias</button>
+                <button onclick="backToMenu()" class="back-btn">Atras</button>
+            </div>
+        </section>
+
+        <!-- DETALLES DEL LIBRO -->
+        <section id="bookDetails" class="detail-container" style="display: none;">
+            <div class="detail-inner">
+                <h2 id="detailTitle"></h2>
+                <div class="detail-content">
+                    <img id="detailImage" src="" alt="Portada">
+                    <div class="detail-info">
+                        <p><strong>Autor:</strong> <span id="detailAuthor"></span></p>
+                        <p><strong>Editorial:</strong> <span id="detailPublisher"></span></p>
+                        <p><strong>Ranking:</strong> <span id="detailRank"></span></p>
+                        <p><strong>Descripcion:</strong></p>
+                        <p><span id="detailDescription"></span></p>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <button onclick="backToMenu()" class="back-btn">Volver al Menu</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
