@@ -83,6 +83,65 @@ GET /reviews.json?isbn={isbn}
 
 ## Cómo Ejecutar
 
+## Requisitos
+**Obligatorios (para que funcione):**
+- Un navegador moderno (Chrome, Brave, Edge o Firefox)
+- Conexión a Internet (para consumir la API de NYT)
+
+**Opcionales (para desarrollo local):**
+- **VS Code** u otro editor de código (recomendado, pero no obligatorio)
+- **Servidor local** (ej: `python3 -m http.server 8000`)
+
+**No necesitas:**
+- Java
+- Maven
+- TypeScript
+- Node.js
+- Frameworks (React, Angular, etc.)
+
+---
+
+## Dónde Desplegar (Recomendado)
+**Vercel (recomendado por rapidez y HTTPS automático).**
+
+---
+
+## Despliegue en Vercel (Paso a Paso)
+**Opción 1: Con GitHub (recomendada)**
+1. Sube el proyecto a un repositorio en GitHub con estos archivos:
+   - `index.html`
+   - `styles.css`
+   - `script.js`
+   - `manifest.webmanifest`
+   - `service-worker.js`
+   - `icons/`
+2. Entra a Vercel y haz clic en `New Project`.
+3. Conecta tu cuenta de GitHub y selecciona el repositorio.
+4. En `Framework Preset` elige `Other`.
+5. Deja vacío `Build Command` y `Output Directory`.
+6. Haz clic en `Deploy`.
+7. Vercel te dará una URL tipo:
+   - `https://tu-proyecto.vercel.app`
+
+**Opción 2: Con Vercel CLI**
+1. Instala la CLI: `npm i -g vercel`
+2. En la carpeta del proyecto ejecuta: `vercel`
+3. Responde las preguntas y al final te dará la URL pública.
+
+---
+
+## Instalación en Celular (PWA)
+Para que aparezca **“Instalar app”** o **“Agregar a pantalla principal”**:
+1. Abre la **URL HTTPS** del despliegue (ej. Vercel).
+2. Espera 10–20 segundos en la página.
+3. En Android:
+   - **Chrome/Brave** → Menú ⋮ → **“Instalar app”** o **“Agregar a pantalla principal”**.
+
+**Si no aparece la opción:**
+1. Borra datos del sitio en el navegador.
+2. Cierra y vuelve a abrir el navegador.
+3. Entra de nuevo a la URL.
+
 ### Paso 1: Servidor Local
 La aplicación ya está configurada para ejecutarse en el servidor local:
 ```bash
@@ -101,6 +160,15 @@ http://localhost:8000
 3. Ingresa los datos solicitados (título, autor, categoría, ISBN, etc.)
 4. Haz clic en **Buscar** para obtener resultados
 5. Haz clic en un libro para ver sus **detalles completos**
+
+---
+
+## PWA (Instalación en Celular)
+Para que salga la opción **“Instalar app”**:
+1. La web debe abrirse en **HTTPS** (Vercel lo da por defecto).
+2. Debe existir `manifest.webmanifest` y `service-worker.js`.
+3. Espera 10–20 segundos después de cargar la página.
+4. En Android: menú del navegador → **“Instalar app”** o **“Agregar a pantalla principal”**.
 
 ---
 
@@ -227,6 +295,86 @@ Tu API Key está **ya configurada**:
 - **CSS3:** Diseño moderno con gradientes y animaciones
 - **JavaScript ES6+:** Async/await, fetch API, manipulación del DOM
 - **NYT Books API v3:** API REST de The New York Times
+- **PWA:** Manifest + Service Worker para instalación en celular
+
+---
+
+## Tecnologías NO Usadas (para aclarar)
+Esta app **no usa**:
+- TypeScript
+- Java
+- Maven
+- Node.js
+- Frameworks (React, Angular, Vue)
+
+No necesitas instalar nada de eso para que funcione.
+
+---
+
+## Cómo Instalar lo Necesario
+**Solo necesitas 2 cosas para trabajar localmente:**
+
+### 1. Editor de código (recomendado)
+**Opción A: Visual Studio Code**
+1. Descarga VS Code desde su web oficial.
+2. Instálalo y abre la carpeta del proyecto.
+
+**Opción B: Cualquier editor**
+También puedes usar Sublime Text, Atom o incluso un editor simple.
+
+### 2. Servidor local (opcional pero recomendado)
+Si quieres abrir la app como PWA localmente, usa un servidor:
+```bash
+python3 -m http.server 8000
+```
+Luego entra a:
+```
+http://localhost:8000
+```
+
+**Si no tienes Python instalado:**
+Puedes instalarlo desde su web oficial, o usar un servidor simple de cualquier editor.
+
+---
+
+## ¿Qué Tecnologías se Usaron y Cómo Instalarlas?
+Esta app se creó con **tecnologías web básicas**, no con frameworks.
+
+**1. HTML5**
+- No se instala. Es el lenguaje base del navegador.
+
+**2. CSS3**
+- No se instala. Es el estilo visual del navegador.
+
+**3. JavaScript (ES6+)**
+- No se instala. Viene en todos los navegadores modernos.
+
+**4. NYT Books API**
+- No se instala. Es un servicio externo al que la web hace requests.
+
+**5. PWA (Manifest + Service Worker)**
+- No se instala. Son archivos que ya están en el proyecto:
+  - `manifest.webmanifest`
+  - `service-worker.js`
+
+**Lo único que sí se instala (si quieres editar y probar localmente):**
+1. **Un editor (VS Code recomendado).**
+   - Descarga e instala VS Code desde su web oficial.
+   - Abre la carpeta del proyecto desde VS Code (`File` → `Open Folder`).
+2. **Un servidor local (por ejemplo Python).**
+   - Instala Python desde su web oficial.
+   - Verifica que esté instalado:
+     ```bash
+     python3 --version
+     ```
+   - Inicia el servidor en la carpeta del proyecto:
+     ```bash
+     python3 -m http.server 8000
+     ```
+   - Abre en el navegador:
+     ```
+     http://localhost:8000
+     ```
 
 ---
 
@@ -294,5 +442,3 @@ escapeHTML()
 ```
 
 ---
-
-
